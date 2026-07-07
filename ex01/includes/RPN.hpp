@@ -12,8 +12,9 @@ public:
   Rpn &operator=(const Rpn &rhs);
 
   const std::stack<int> &getValues();
-  void doOperation(const char &c);
+  long doOperation(const char &c);
   void processRpn(std::string str);
+  long result;
 
   ~Rpn();
 

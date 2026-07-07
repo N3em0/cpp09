@@ -1,4 +1,4 @@
-NAME	:=	btc
+NAME	:=	RPN
 
 SRC_DIR := src
 BUILD_DIR	:=	.build
@@ -6,7 +6,7 @@ INC_DIR := includes
 
 SRC_FILES		:=	\
 main.cpp \
-Rpn.cpp
+RPN.cpp
 
 SRC		:=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
