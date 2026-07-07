@@ -13,7 +13,8 @@ int main(int argc, char **argv)
     Rpn a;
 
     a.processRpn(argv[1]);
-    std::cout << a.result << std::endl;
+    std::cout << a.getResult() << std::endl;
+    return (0);
   }
   catch (std::exception &e)
   {
