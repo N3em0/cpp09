@@ -5,6 +5,7 @@
 #include <cstring>
 #include <ctime>
 #include <fstream>
+#include <iostream>
 #include <sstream>
 
 BitcoinExchange::BitcoinExchange() : csvData_() {}
@@ -21,6 +22,11 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &rhs)
     this->csvData_ = rhs.csvData_;
   }
   return (*this);
+}
+
+const std::map<std::string, float> &BitcoinExchange::getCsvData()
+{
+  return (this->csvData_);
 }
 
 void BitcoinExchange::processCsvData()
@@ -110,6 +116,8 @@ void BitcoinExchange::processInData(char *file)
     return;
   }
   std::getline(inFile, str);
+  if (std::strcmp(str.c_str(), "date | value") != 0)
+    throw BitcoinExchange::badInputHeader();
   while (std::getline(inFile, str))
   {
     std::string date = str.substr(0, str.find('|') - 1);
@@ -144,5 +152,7 @@ void BitcoinExchange::processInData(char *file)
     }
   }
 }
+
+BitcoinExchange::badInputHeader::badInputHeader() {}
 
 BitcoinExchange::~BitcoinExchange() {}
