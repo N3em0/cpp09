@@ -12,13 +12,47 @@ public:
   Rpn &operator=(const Rpn &rhs);
 
   const std::stack<int> &getValues();
-  long doOperation(const char &c);
+  const long &getResult();
+  void doOperation(const char &c);
   void processRpn(std::string str);
-  long result;
+
+  class badCharException : public std::exception
+  {
+  public:
+    badCharException();
+    virtual const char *what() const throw()
+    {
+      return ("Error: Wrong char input");
+    }
+
+  };
+
+  class tooManyOp : public std::exception
+  {
+  public:
+    tooManyOp();
+    virtual const char *what() const throw()
+    {
+      return ("Error: Too many operators\nValid operator count = digitCount - 1");
+    }
+
+  };
+
+  class tooManyDigits : public std::exception
+  {
+  public:
+    tooManyDigits();
+    virtual const char *what() const throw()
+    {
+      return ("Error: Too many digits\nValid digits count = operatorCount + 1");
+    }
+
+  };
 
   ~Rpn();
 
 private:
+  long result_;
   std::stack<int> values_;
 };
 
