@@ -11,7 +11,7 @@ BitcoinExchange.cpp
 SRC		:=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
 OBJ			:=	$(SRC:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
-DEP			:=	$(OBJ:%.o=.d)
+DEP			:=	$(OBJ:.o=.d)
 
 CXX			:=	c++
 CXXFLAGS	:=  -Wall -Wextra -Werror -g3 -std=c++98
@@ -30,7 +30,7 @@ $(NAME)	:	$(OBJ)
 $(BUILD_DIR):
 			@mkdir -p $@
 
-$(BUILD_DIR)/%.o:	$(SRC_DIR)/%.cpp | $(BUILD_DIR) 
+$(BUILD_DIR)/%.o:	$(SRC_DIR)/%.cpp | $(BUILD_DIR)
 			@echo "Compilation de $@"
 			$(CXX) $(CXXFLAGS) $(INCLUDE) -c -o $@ $<
 
