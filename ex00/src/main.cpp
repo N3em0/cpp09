@@ -18,9 +18,17 @@ int main(int argc, char **argv)
     std::cout << "Error: could not open file." << std::endl;
     return (1);
   }
-  BitcoinExchange be;
+  try
+  {
+    BitcoinExchange be;
 
-  be.processCsvData();
-  be.processInData(argv[1]);
-  return (0);
+    be.processCsvData();
+    be.processInData(argv[1]);
+    return (0);
+  }
+  catch (std::exception &e)
+  {
+    std::cout << e.what() << std::endl;
+    return (1);
+  }
 }
