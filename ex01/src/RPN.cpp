@@ -1,6 +1,5 @@
 #include "RPN.hpp"
 #include <cstdlib>
-#include <exception>
 
 Rpn::Rpn() : result_(0), values_() {}
 
@@ -20,8 +19,6 @@ const std::stack<int> &Rpn::getValues() { return (this->values_); }
 
 const long &Rpn::getResult() { return (this->result_); }
 
-#include <iostream>
-
 void Rpn::doOperation(const char &c)
 {
   if (this->values_.size() < 2)
@@ -37,7 +34,7 @@ void Rpn::doOperation(const char &c)
     this->result_ = b + a;
     break;
   case ('-'):
-    this->result_= b - a;
+    this->result_ = b - a;
     break;
   case ('*'):
     this->result_ = b * a;
@@ -47,12 +44,12 @@ void Rpn::doOperation(const char &c)
     break;
   }
   this->values_.push(static_cast<int>(this->result_));
-  return ;
+  return;
 }
 
 static bool isOperator(const char &c)
 {
-  switch(c)
+  switch (c)
   {
   case ('+'):
     return (true);
@@ -65,7 +62,7 @@ static bool isOperator(const char &c)
   case (' '):
     return (false);
   default:
-      throw Rpn::badCharException();
+    throw Rpn::badCharException();
   }
 }
 
