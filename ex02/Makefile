@@ -6,7 +6,6 @@ INC_DIR := includes
 
 SRC_FILES		:=	\
 main.cpp \
-RPN.cpp
 
 SRC		:=	$(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
