@@ -29,13 +29,6 @@ static void parseArgs(int argc, char **argv, T &arr)
   }
   if (hasDuplicates(arr) == false)
     throw std::exception();
-  // /* DEBUG */
-  // for (typename T::iterator it = arr.begin(); it != arr.end(); ++it)
-  // {
-  //   std::cout << "it->first  : " << it->first << std::endl;
-  //   std::cout << "it->second : " << it->second << std::endl;
-  // }
-  // /* DEBUG */
 }
 
 int main(int argc, char **argv)
@@ -52,37 +45,7 @@ int main(int argc, char **argv)
     arr.reserve(argc - 1);
     parseArgs(argc, argv, arr);
     PmergeMe<std::vector<std::pair<int, int> > > p(arr);
-    // p.downSort(p.arr_);
-    p.sortPairs(arr, sorted, pend, rest);
-    /* DEBUG */
-    for (std::vector<std::pair<int, int> >::iterator it = arr.begin();
-         it != arr.end(); ++it)
-    {
-      std::cout << "arr->first  : " << it->first << std::endl;
-      // std::cout << "arr->second : " << it->second << std::endl;
-    }
-    /* DEBUG */
-    for (std::vector<std::pair<int, int> >::iterator it = sorted.begin();
-         it != sorted.end(); ++it)
-    {
-      std::cout << "sorted->first  : " << it->first << std::endl;
-      // std::cout << "sorted->second : " << it->second << std::endl;
-    }
-    /* DEBUG */
-    for (std::vector<std::pair<int, int> >::iterator it = pend.begin();
-         it != pend.end(); ++it)
-    {
-      std::cout << "pend->first  : " << it->first << std::endl;
-      // std::cout << "pend->second : " << it->second << std::endl;
-    }
-    /* DEBUG */
-    for (std::vector<std::pair<int, int> >::iterator it = rest.begin();
-         it != rest.end(); ++it)
-    {
-      std::cout << "rest->first  : " << it->first << std::endl;
-      // std::cout << "rest->second : " << it->second << std::endl;
-    }
-    /* DEBUG */
+    sorted = p.downSort(p.arr_);
   }
   catch (std::exception &e)
   {
