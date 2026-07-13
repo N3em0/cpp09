@@ -13,14 +13,15 @@ public:
   PmergeMe(const PmergeMe<T> &src);
   PmergeMe &operator=(const PmergeMe<T> &rhs);
 
-  T &downSort(T &arr);
-  T &upSort(T &big, T &small, T &rest);
+  void downSort(T &arr);
+  void upSort(T &big, T &small, T &rest);
   void sortPairs(T &unsorted, T &big, T &small, T &rest);
   T matchBigSmall(T &big, T &small);
-  void computeJacobSuits(T &small, std::vector<int> &jacobSuit);
-  void computeJacobIndex(std::vector<int> &jacobIndex,
-                         const std::vector<int> &jacobSuit, size_t size,
-                         bool empty);
+  void matchBigId(T &big, T &small);
+  void computeJacobSuits(T &small, std::vector<int> &jSuit);
+  void computeJacobIndex(std::vector<int> &jIndex,
+                         const std::vector<int> &jSuit);
+  void binarySearch(T &big, T &small, const std::vector<int> &jIndex);
 
   ~PmergeMe();
 

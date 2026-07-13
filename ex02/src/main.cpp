@@ -45,7 +45,11 @@ int main(int argc, char **argv)
     arr.reserve(argc - 1);
     parseArgs(argc, argv, arr);
     PmergeMe<std::vector<std::pair<int, int> > > p(arr);
-    sorted = p.downSort(p.arr_);
+    p.downSort(p.arr_);
+    for (std::vector<std::pair<int, int> >::iterator it = p.arr_.begin(); it != p.arr_.end(); ++it)
+    {
+      std::cout << "p.arr_ : " << it->first << std::endl;
+    }
   }
   catch (std::exception &e)
   {

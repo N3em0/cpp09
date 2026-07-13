@@ -28,6 +28,7 @@ static void printArr(T &big, T &small, T &rest)
 /* DEBUG */
 
 #include "CompareSecond.hpp"
+#include "CompareFirst.hpp"
 #include "PmergeMe.hpp"
 #include <algorithm>
 #include <set>
@@ -57,24 +58,45 @@ PmergeMe<T> &PmergeMe<T>::operator=(const PmergeMe<T> &)
 template <typename T>
 void PmergeMe<T>::sortPairs(T &unsorted, T &big, T &small, T &rest)
 {
+  int id = 1;
+  std::cout << "ah ouais ?" << std::endl;
   for (size_t i = 0; i < unsorted.size(); i++)
   {
     std::set<std::pair<int, int> > s;
     if ((i + 1) < unsorted.size())
     {
-      unsorted[i].second = this->id_;
-      unsorted[i + 1].second = this->id_;
+        unsorted[i].second = id;
+        unsorted[i + 1].second = id;
       s.insert(unsorted[i]);
       s.insert(unsorted[i + 1]);
       big.push_back(*(s.rbegin()));
       small.push_back(*(s.begin()));
       s.clear();
       i++;
-      this->id_++;
+      id++;
     }
     else
       rest.push_back(unsorted[i]);
   }
+}
+
+template <typename T>
+void PmergeMe<T>::binarySearch(T &big, T &small, const std::vector<int> &jIndex)
+{
+  big.insert(big.begin(), small[0]);
+  for (std::vector<int>::const_iterator it = jIndex.begin(); it != jIndex.end(); it++)
+  {
+    typename T::iterator fit;
+    CompareFirst index(small[(*it) - 1].second);
+    typename T::iterator idIt;
+    idIt = std::find_if(big.begin(), big.end(), index);
+    if (idIt != big.end())
+      fit = std::lower_bound(big.begin(), idIt, small[(*it) - 1].first);
+    else
+      fit = std::lower_bound(big.begin(), big.end(), small[(*it) - 1].first);
+    big.insert(fit, small[(*it) - 1]);
+  }
+
 }
 
 template <typename T>
@@ -88,14 +110,19 @@ void PmergeMe<T>::computeJacobSuits(T &small, std::vector<int> &jSuit)
     val = nMinus1 + (2 * nMinus2);
     nMinus2 = nMinus1;
     nMinus1 = val;
-    jSuit.push_back(val);
+    if (val < small.size())
+      jSuit.push_back(val);
+    else
+    {
+      jSuit.push_back(small.size());
+      break;
+    }
   }
 }
 
 template <typename T>
 void PmergeMe<T>::computeJacobIndex(std::vector<int> &jIndex,
-                                    const std::vector<int> &jSuit, size_t size,
-                                    bool empty)
+                                    const std::vector<int> &jSuit)
 {
   typedef std::vector<int>::const_iterator cit;
   int previous = 1;
@@ -109,12 +136,23 @@ void PmergeMe<T>::computeJacobIndex(std::vector<int> &jIndex,
     }
     previous = *it;
   }
-  (void)size;
-  (void)empty;
-  // if (!empty)
-  // {
-  //   jIndex.push_back(size + 2);
-  // }
+}
+
+template <typename T>
+void PmergeMe<T>::matchBigId(T &big, T &save)
+{
+  for (typename T::iterator it = big.begin(); it != big.end(); ++it)
+  {
+    CompareFirst index(it->first);
+    typename T::iterator fit;
+    fit = std::find_if(save.begin(), save.end(), index);
+    // std::cout << "ID it->first : " << it->first << std::endl;
+    // std::cout << "ID it->second : " << it->second << std::endl;
+    // std::cout << "ID fit->first : " << fit->first << std::endl;
+    // std::cout << "ID fit->second : " << fit->second << std::endl;
+    it->second = fit->second;
+  }
+  return;
 }
 
 template <typename T>
@@ -127,44 +165,60 @@ T PmergeMe<T>::matchBigSmall(T &big, T &small)
     CompareSecond index(it->second);
     typename T::iterator fit;
     fit = std::find_if(small.begin(), small.end(), index);
+    // std::cout << "SMALL it->first : " << it->first << std::endl;
+    // std::cout << "SMALL it->second : " << it->second << std::endl;
+    // std::cout << "SMALL fit->first : " << fit->first << std::endl;
+    // std::cout << "SMALL fit->second : " << fit->second << std::endl;
     smallS.push_back(*(fit));
   }
   return (smallS);
 }
 
 template <typename T>
-T &PmergeMe<T>::upSort(T &big, T &small, T &rest)
+void PmergeMe<T>::upSort(T &big, T &small, T &rest)
 {
   std::vector<int> jSuit;
+  std::cout << "PrintArr upSort start" << std::endl;
+  printArr(big, small, rest);
   small = matchBigSmall(big, small);
+  std::cout << "PrintArr matchBigSmall after" << std::endl;
+  if (!rest.empty())
+    small.push_back(rest[0]);
+  printArr(big, small, rest);
   computeJacobSuits(small, jSuit);
-  for (std::vector<int>::iterator it = jSuit.begin(); it != jSuit.end(); ++it)
-  {
-    std::cout << "val  jSuit : " << *it << std::endl;
-  }
+  // for (std::vector<int>::iterator it = jSuit.begin(); it != jSuit.end(); ++it)
+  // {
+  //   std::cout << "val  jSuit : " << *it << std::endl;
+  // }
   std::vector<int> jIndex;
-  computeJacobIndex(jIndex, jSuit, small.size(), rest.empty());
-  for (std::vector<int>::iterator it = jIndex.begin(); it != jIndex.end(); ++it)
-  {
-    std::cout << "val jIndex : " << *it << std::endl;
-  }
-  return (big);
+  computeJacobIndex(jIndex, jSuit);
+  binarySearch(big, small, jIndex);
+  // for (std::vector<int>::iterator it = jIndex.begin(); it != jIndex.end(); ++it)
+  // {
+  //   std::cout << "val jIndex : " << *it << std::endl;
+  // }
 }
 
 template <typename T>
-T &PmergeMe<T>::downSort(T &arr)
+void PmergeMe<T>::downSort(T &arr)
 {
   T big;
+  T save;
   T small;
   T rest;
   if (arr.size() > 1)
   {
     sortPairs(arr, big, small, rest);
+    save = big;
     printArr(big, small, rest);
-    big = downSort(big);
+    downSort(big);
+    std::cout << "-----------------" << std::endl;
+    matchBigId(big, save);
+    std::cout << "=====================" << std::endl;
+    upSort(big, small, rest);
+    std::cout << "=====================" << std::endl;
   }
-  printArr(big, small, rest);
-  return (upSort(big, small, rest));
+  return ;
 }
 
 template <typename T>
