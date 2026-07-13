@@ -4,10 +4,14 @@ CompareSecond::CompareSecond(int target) : target(target) {}
 
 CompareSecond::CompareSecond() {}
 
-CompareSecond::CompareSecond(const CompareSecond &) {}
+CompareSecond::CompareSecond(const CompareSecond &src) : target(src.target) {}
 
-CompareSecond &CompareSecond::operator=(const CompareSecond &)
+CompareSecond &CompareSecond::operator=(const CompareSecond &rhs)
 {
+  if (this != &rhs)
+  {
+    this->target = rhs.target;
+  }
   return (*this);
 }
 
