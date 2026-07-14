@@ -41,7 +41,7 @@ PmergeMe<T>::PmergeMe() : arr_(), sorted_(), id_(1)
 template <typename T>
 PmergeMe<T>::PmergeMe(T arr) : arr_(arr), sorted_(), id_(1)
 {
-  sorted_.reserve(this->arr_.size());
+  // sorted_.reserve(this->arr_.size());
 }
 
 template <typename T>
@@ -161,7 +161,7 @@ template <typename T>
 T PmergeMe<T>::matchBigSmall(T &big, T &small)
 {
   T smallS;
-  smallS.reserve(small.size());
+  // smallS.reserve(small.size());
   for (typename T::iterator it = big.begin(); it != big.end(); ++it)
   {
     SecondEqual index(it->second);
