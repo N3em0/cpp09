@@ -41,7 +41,6 @@ PmergeMe<T>::PmergeMe() : arr_(), sorted_(), id_(1)
 template <typename T>
 PmergeMe<T>::PmergeMe(T arr) : arr_(arr), sorted_(), id_(1)
 {
-  // sorted_.reserve(this->arr_.size());
 }
 
 template <typename T>
@@ -59,19 +58,22 @@ template <typename T>
 void PmergeMe<T>::sortPairs(T &unsorted, T &big, T &small, T &rest)
 {
   int id = 1;
-  std::cout << "ah ouais ?" << std::endl;
   for (size_t i = 0; i < unsorted.size(); i++)
   {
-    std::set<std::pair<int, int> > s;
     if ((i + 1) < unsorted.size())
     {
       unsorted[i].second = id;
       unsorted[i + 1].second = id;
-      s.insert(unsorted[i]);
-      s.insert(unsorted[i + 1]);
-      big.push_back(*(s.rbegin()));
-      small.push_back(*(s.begin()));
-      s.clear();
+      if (unsorted[i].first > unsorted[i + 1].first)
+      {
+        big.push_back(unsorted[i]);
+        small.push_back(unsorted[i + 1]);
+      }
+      else
+      {
+        small.push_back(unsorted[i]);
+        big.push_back(unsorted[i + 1]);
+      }
       i++;
       id++;
     }
@@ -161,16 +163,11 @@ template <typename T>
 T PmergeMe<T>::matchBigSmall(T &big, T &small)
 {
   T smallS;
-  // smallS.reserve(small.size());
   for (typename T::iterator it = big.begin(); it != big.end(); ++it)
   {
     SecondEqual index(it->second);
     typename T::iterator fit;
     fit = std::find_if(small.begin(), small.end(), index);
-    // std::cout << "SMALL it->first : " << it->first << std::endl;
-    // std::cout << "SMALL it->second : " << it->second << std::endl;
-    // std::cout << "SMALL fit->first : " << fit->first << std::endl;
-    // std::cout << "SMALL fit->second : " << fit->second << std::endl;
     smallS.push_back(*(fit));
   }
   return (smallS);
@@ -180,13 +177,13 @@ template <typename T>
 void PmergeMe<T>::upSort(T &big, T &small, T &rest)
 {
   std::vector<int> jSuit;
-  std::cout << "PrintArr upSort start" << std::endl;
-  printArr(big, small, rest);
+  // std::cout << "PrintArr upSort start" << std::endl;
+  // printArr(big, small, rest);
   small = matchBigSmall(big, small);
-  std::cout << "PrintArr matchBigSmall after" << std::endl;
+  // std::cout << "PrintArr matchBigSmall after" << std::endl;
   if (!rest.empty())
     small.push_back(rest[0]);
-  printArr(big, small, rest);
+  // printArr(big, small, rest);
   computeJacobSuits(small, jSuit);
   // for (std::vector<int>::iterator it = jSuit.begin(); it != jSuit.end();
   // ++it)
@@ -214,13 +211,13 @@ void PmergeMe<T>::downSort(T &arr)
   {
     sortPairs(arr, big, small, rest);
     save = big;
-    printArr(big, small, rest);
+    // printArr(big, small, rest);
     downSort(big);
-    std::cout << "-----------------" << std::endl;
+    // std::cout << "-----------------" << std::endl;
     matchBigId(big, save);
-    std::cout << "=====================" << std::endl;
+    // std::cout << "=====================" << std::endl;
     upSort(big, small, rest);
-    std::cout << "=====================" << std::endl;
+    // std::cout << "=====================" << std::endl;
     arr = big;
   }
   return;
