@@ -51,16 +51,21 @@ int main(int argc, char **argv)
     arr.reserve(argc - 1);
     parseArgs(argc, argv, arr);
     PmergeMe<std::vector<std::pair<int, int> > > v(arr);
-    v.downSort(v.arr_);
+    std::cout << "before : ";
     for (std::vector<std::pair<int, int> >::iterator it = v.arr_.begin();
          it != v.arr_.end(); ++it)
-    {
-      std::cout << "v.arr_ : " << it->first << std::endl;
-    }
+      std::cout << it->first << " ";
+    std::cout << std::endl;
+    v.downSort(v.arr_);
+    std::cout << "After : ";
+    for (std::vector<std::pair<int, int> >::iterator it = v.arr_.begin();
+         it != v.arr_.end(); ++it)
+      std::cout << it->first << " ";
+    std::cout << std::endl;
     end = clock();
     double time_taken = double(end - start) / double(CLOCKS_PER_SEC);
-    std::cout << "Time taken by program is : " << std::fixed << time_taken
-              << std::setprecision(5);
+    std::cout << "Time taken for a vector of size " << v.arr_.size()
+              << " is : " << std::fixed << time_taken << std::setprecision(5);
     std::cout << " sec " << std::endl;
   }
   catch (std::exception &e)
@@ -78,16 +83,21 @@ int main(int argc, char **argv)
     std::deque<std::pair<int, int> > rest;
     parseArgs(argc, argv, arr);
     PmergeMe<std::deque<std::pair<int, int> > > d(arr);
-    d.downSort(d.arr_);
+    std::cout << "Before : ";
     for (std::deque<std::pair<int, int> >::iterator it = d.arr_.begin();
          it != d.arr_.end(); ++it)
-    {
-      std::cout << "d.arr_ : " << it->first << std::endl;
-    }
+      std::cout << it->first << " ";
+    std::cout << std::endl;
+    d.downSort(d.arr_);
+    std::cout << "After : ";
+    for (std::deque<std::pair<int, int> >::iterator it = d.arr_.begin();
+         it != d.arr_.end(); ++it)
+      std::cout << it->first << " ";
+    std::cout << std::endl;
     end = clock();
     double time_taken = double(end - start) / double(CLOCKS_PER_SEC);
-    std::cout << "Time taken by program is : " << std::fixed << time_taken
-              << std::setprecision(5);
+    std::cout << "Time taken for a deque of size " << d.arr_.size()
+              << " is : " << std::fixed << time_taken << std::setprecision(5);
     std::cout << " sec " << std::endl;
   }
   catch (std::exception &e)
