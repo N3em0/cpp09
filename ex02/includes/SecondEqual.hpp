@@ -3,7 +3,7 @@
 
 #include <utility>
 
-class SecondEqual
+struct SecondEqual
 {
 public:
   SecondEqual();
