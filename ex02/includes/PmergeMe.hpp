@@ -1,7 +1,6 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
-#include <cstdlib>
 #include <vector>
 
 template <typename T>
@@ -18,7 +17,7 @@ public:
   void sortPairs(T &unsorted, T &big, T &small, T &rest);
   T matchBigSmall(T &big, T &small);
   void matchBigId(T &big, T &small);
-  void computeJacobSuits(T &small, std::vector<int> &jSuit);
+  void computeJacobSuit(T &small, std::vector<int> &jSuit);
   void computeJacobIndex(std::vector<int> &jIndex,
                          const std::vector<int> &jSuit);
   void binarySearch(T &big, T &small, const std::vector<int> &jIndex);

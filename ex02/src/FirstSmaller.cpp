@@ -11,5 +11,5 @@ FirstSmaller::~FirstSmaller() {}
 
 bool FirstSmaller::operator()(const std::pair<int, int> &p, int value) const
 {
-  return p.first < value;
+  return (p.first < value);
 }

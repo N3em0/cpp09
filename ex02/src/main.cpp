@@ -1,12 +1,11 @@
 #include "PmergeMe.hpp"
 #include <algorithm>
 #include <bits/stdc++.h> //fixed(), setprecision()
-#include <ctime>
+#include <ctime>         //clock();
 #include <deque>
 #include <exception>
-#include <iomanip>
 #include <iostream>
-#include <sstream>
+#include <sstream> //std::stringstream
 #include <utility> //std::pair, std::make_pair
 #include <vector>
 
@@ -40,28 +39,29 @@ int main(int argc, char **argv)
   if (argc < 3)
     return (1);
 
+  /* std::vector */
+  std::cout << "\n++++++++++ STD::VECTOR ++++++++++\n" << std::endl;
   try
   {
     clock_t start, end;
     start = clock();
     std::vector<std::pair<int, int> > arr;
-    std::vector<std::pair<int, int> > sorted;
-    std::vector<std::pair<int, int> > pend;
-    std::vector<std::pair<int, int> > rest;
     arr.reserve(argc - 1);
     parseArgs(argc, argv, arr);
     PmergeMe<std::vector<std::pair<int, int> > > v(arr);
-    std::cout << "before : ";
+
+    std::cout << "Before : ";
     for (std::vector<std::pair<int, int> >::iterator it = v.arr_.begin();
          it != v.arr_.end(); ++it)
       std::cout << it->first << " ";
-    std::cout << std::endl;
+    std::cout << std::endl << std::endl;
+
     v.downSort(v.arr_);
     std::cout << "After : ";
     for (std::vector<std::pair<int, int> >::iterator it = v.arr_.begin();
          it != v.arr_.end(); ++it)
       std::cout << it->first << " ";
-    std::cout << std::endl;
+    std::cout << std::endl << std::endl;
     end = clock();
     double time_taken = double(end - start) / double(CLOCKS_PER_SEC);
     std::cout << "Time taken for a vector of size " << v.arr_.size()
@@ -73,27 +73,27 @@ int main(int argc, char **argv)
     std::cout << e.what() << std::endl;
     return (1);
   }
+
+  /* std::deque */
+  std::cout << "\n++++++++++ STD::DEQUE ++++++++++\n" << std::endl;
   try
   {
     clock_t start, end;
     start = clock();
     std::deque<std::pair<int, int> > arr;
-    std::deque<std::pair<int, int> > sorted;
-    std::deque<std::pair<int, int> > pend;
-    std::deque<std::pair<int, int> > rest;
     parseArgs(argc, argv, arr);
     PmergeMe<std::deque<std::pair<int, int> > > d(arr);
     std::cout << "Before : ";
     for (std::deque<std::pair<int, int> >::iterator it = d.arr_.begin();
          it != d.arr_.end(); ++it)
       std::cout << it->first << " ";
-    std::cout << std::endl;
+    std::cout << std::endl << std::endl;
     d.downSort(d.arr_);
     std::cout << "After : ";
     for (std::deque<std::pair<int, int> >::iterator it = d.arr_.begin();
          it != d.arr_.end(); ++it)
       std::cout << it->first << " ";
-    std::cout << std::endl;
+    std::cout << std::endl << std::endl;
     end = clock();
     double time_taken = double(end - start) / double(CLOCKS_PER_SEC);
     std::cout << "Time taken for a deque of size " << d.arr_.size()

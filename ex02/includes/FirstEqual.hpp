@@ -5,7 +5,6 @@
 
 struct FirstEqual
 {
-public:
   FirstEqual();
   FirstEqual(int target);
   FirstEqual &operator=(const FirstEqual &rhs);
@@ -16,8 +15,6 @@ public:
   ~FirstEqual();
 
   int target;
-
-private:
 };
 
 #endif
