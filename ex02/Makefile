@@ -49,4 +49,7 @@ re:
 			$(MAKE) fclean
 			$(MAKE) all
 
-.PHONY:	all clean fclean re
+debug:
+			$(MAKE) re CXXFLAGS="$(CXXFLAGS) -DDEBUG_MODE"
+
+.PHONY:	all clean fclean re debug
