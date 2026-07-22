@@ -19,5 +19,5 @@ SecondEqual::~SecondEqual() {}
 
 bool SecondEqual::operator()(const std::pair<int, int> &p) const
 {
-  return target == p.second;
+  return (target == p.second);
 }

@@ -19,5 +19,5 @@ FirstEqual::~FirstEqual() {}
 
 bool FirstEqual::operator()(const std::pair<int, int> &p) const
 {
-  return this->target == p.first;
+  return (this->target == p.first);
 }

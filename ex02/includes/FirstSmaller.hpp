@@ -5,7 +5,6 @@
 
 struct FirstSmaller
 {
-public:
   FirstSmaller();
   FirstSmaller(int target);
   FirstSmaller &operator=(const FirstSmaller &rhs);
@@ -14,8 +13,6 @@ public:
   bool operator()(const std::pair<int, int> &p, int value) const;
 
   ~FirstSmaller();
-
-private:
 };
 
 #endif

@@ -5,7 +5,6 @@
 
 struct SecondEqual
 {
-public:
   SecondEqual();
   SecondEqual(int target);
   SecondEqual &operator=(const SecondEqual &rhs);
@@ -16,8 +15,6 @@ public:
   ~SecondEqual();
 
   int target;
-
-private:
 };
 
 #endif
