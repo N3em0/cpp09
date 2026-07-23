@@ -1,10 +1,12 @@
 #include "FirstEqual.hpp"
 
-FirstEqual::FirstEqual(int target) : target(target) {}
+FirstEqual::FirstEqual(int target)
+	: target(target) {}
 
 FirstEqual::FirstEqual() {}
 
-FirstEqual::FirstEqual(const FirstEqual &src) : target(src.target) {}
+FirstEqual::FirstEqual(const FirstEqual &src)
+	: target(src.target) {}
 
 FirstEqual &FirstEqual::operator=(const FirstEqual &rhs)
 {

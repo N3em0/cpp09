@@ -8,12 +8,11 @@
 #include <iostream>
 #include <sstream>
 
-BitcoinExchange::BitcoinExchange() : csvData_() {}
+BitcoinExchange::BitcoinExchange()
+	: csvData_() {}
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &src)
-	: csvData_(src.csvData_)
-{
-}
+	: csvData_(src.csvData_) {}
 
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &rhs)
 {
@@ -41,8 +40,7 @@ void BitcoinExchange::processCsvData()
 	std::getline(inFile, str);
 	while (std::getline(inFile, str))
 	{
-		this->csvData_[str.substr(0, str.find(','))] =
-			std::atof((str.substr(str.find(',') + 1)).c_str());
+		this->csvData_[str.substr(0, str.find(','))] = std::atof((str.substr(str.find(',') + 1)).c_str());
 	}
 }
 
@@ -81,8 +79,7 @@ static bool parseDate(std::string date)
 	result = std::mktime(&tDate);
 	if (result == -1)
 		return false;
-	if ((year - 1900) != tDate.tm_year || (month - 1) != tDate.tm_mon ||
-		day != tDate.tm_mday)
+	if ((year - 1900) != tDate.tm_year || (month - 1) != tDate.tm_mon || day != tDate.tm_mday)
 		return false;
 	if (result < btcCreation)
 		return (false);
@@ -129,8 +126,7 @@ void BitcoinExchange::processInData(char *file)
 		}
 		if (!parseValue(valueStr))
 		{
-			std::cout << "Error: bad input => [" << valueStr << "]"
-					  << std::endl;
+			std::cout << "Error: bad input => [" << valueStr << "]" << std::endl;
 			continue;
 		}
 		float value = std::atof(valueStr.c_str());
@@ -157,8 +153,7 @@ void BitcoinExchange::processInData(char *file)
 				it--;
 			}
 			float result = value * it->second;
-			std::cout << date << " => " << value << " = " << result
-					  << std::endl;
+			std::cout << date << " => " << value << " = " << result << std::endl;
 		}
 	}
 }
