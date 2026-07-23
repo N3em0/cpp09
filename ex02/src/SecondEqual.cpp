@@ -8,16 +8,16 @@ SecondEqual::SecondEqual(const SecondEqual &src) : target(src.target) {}
 
 SecondEqual &SecondEqual::operator=(const SecondEqual &rhs)
 {
-  if (this != &rhs)
-  {
-    this->target = rhs.target;
-  }
-  return (*this);
+	if (this != &rhs)
+	{
+		this->target = rhs.target;
+	}
+	return (*this);
 }
 
 SecondEqual::~SecondEqual() {}
 
 bool SecondEqual::operator()(const std::pair<int, int> &p) const
 {
-  return (target == p.second);
+	return (target == p.second);
 }

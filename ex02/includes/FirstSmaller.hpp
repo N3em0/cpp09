@@ -5,14 +5,13 @@
 
 struct FirstSmaller
 {
-  FirstSmaller();
-  FirstSmaller(int target);
-  FirstSmaller &operator=(const FirstSmaller &rhs);
-  FirstSmaller(const FirstSmaller &src);
+	FirstSmaller();
+	FirstSmaller(const FirstSmaller &src);
+	FirstSmaller &operator=(const FirstSmaller &rhs);
 
-  bool operator()(const std::pair<int, int> &p, int value) const;
+	bool operator()(const std::pair<int, int> &p, int value) const;
 
-  ~FirstSmaller();
+	~FirstSmaller();
 };
 
 #endif

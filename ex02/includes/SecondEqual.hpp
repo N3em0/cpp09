@@ -5,16 +5,16 @@
 
 struct SecondEqual
 {
-  SecondEqual();
-  SecondEqual(int target);
-  SecondEqual &operator=(const SecondEqual &rhs);
-  SecondEqual(const SecondEqual &src);
+	SecondEqual();
+	SecondEqual(int target);
+	SecondEqual(const SecondEqual &src);
+	SecondEqual &operator=(const SecondEqual &rhs);
 
-  bool operator()(const std::pair<int, int> &p) const;
+	bool operator()(const std::pair<int, int> &p) const;
 
-  ~SecondEqual();
+	~SecondEqual();
 
-  int target;
+	int target;
 };
 
 #endif

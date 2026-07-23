@@ -5,16 +5,16 @@
 
 struct FirstEqual
 {
-  FirstEqual();
-  FirstEqual(int target);
-  FirstEqual &operator=(const FirstEqual &rhs);
-  FirstEqual(const FirstEqual &src);
+	FirstEqual();
+	FirstEqual(int target);
+	FirstEqual(const FirstEqual &src);
+	FirstEqual &operator=(const FirstEqual &rhs);
 
-  bool operator()(const std::pair<int, int> &p) const;
+	bool operator()(const std::pair<int, int> &p) const;
 
-  ~FirstEqual();
+	~FirstEqual();
 
-  int target;
+	int target;
 };
 
 #endif
