@@ -51,7 +51,8 @@ int main(int argc, char **argv)
 		return (1);
 
 	/* std::vector */
-	std::cout << "\n++++++++++ STD::VECTOR ++++++++++\n" << std::endl;
+	std::cout << "\n++++++++++ STD::VECTOR ++++++++++\n"
+			  << std::endl;
 	try
 	{
 		clock_t start, end;
@@ -66,22 +67,20 @@ int main(int argc, char **argv)
 		PmergeMe<std::vector<std::pair<int, int> > > v(arr);
 
 		std::cout << "Before : ";
-		for (std::vector<std::pair<int, int> >::iterator it = v.arr_.begin();
-			 it != v.arr_.end(); ++it)
+		for (std::vector<std::pair<int, int> >::iterator it = v.arr_.begin(); it != v.arr_.end(); ++it)
 			std::cout << it->first << " ";
-		std::cout << std::endl << std::endl;
+		std::cout << std::endl
+				  << std::endl;
 
 		v.downSort(v.arr_);
 		std::cout << "After : ";
-		for (std::vector<std::pair<int, int> >::iterator it = v.arr_.begin();
-			 it != v.arr_.end(); ++it)
+		for (std::vector<std::pair<int, int> >::iterator it = v.arr_.begin(); it != v.arr_.end(); ++it)
 			std::cout << it->first << " ";
-		std::cout << std::endl << std::endl;
+		std::cout << std::endl
+				  << std::endl;
 		end = clock();
 		double time_taken = double(end - start) / double(CLOCKS_PER_SEC);
-		std::cout << "Time taken for a vector of size " << v.arr_.size()
-				  << " is : " << std::fixed << time_taken
-				  << std::setprecision(5);
+		std::cout << "Time taken for a vector of size " << v.arr_.size() << " is : " << std::fixed << time_taken << std::setprecision(5);
 		std::cout << " sec " << std::endl;
 	}
 	catch (std::exception &e)
@@ -90,7 +89,8 @@ int main(int argc, char **argv)
 	}
 
 	/* std::deque */
-	std::cout << "\n++++++++++ STD::DEQUE ++++++++++\n" << std::endl;
+	std::cout << "\n++++++++++ STD::DEQUE ++++++++++\n"
+			  << std::endl;
 	try
 	{
 		clock_t start, end;
@@ -104,21 +104,19 @@ int main(int argc, char **argv)
 		PmergeMe<std::deque<std::pair<int, int> > > d(arr);
 
 		std::cout << "Before : ";
-		for (std::deque<std::pair<int, int> >::iterator it = d.arr_.begin();
-			 it != d.arr_.end(); ++it)
+		for (std::deque<std::pair<int, int> >::iterator it = d.arr_.begin(); it != d.arr_.end(); ++it)
 			std::cout << it->first << " ";
-		std::cout << std::endl << std::endl;
+		std::cout << std::endl
+				  << std::endl;
 		d.downSort(d.arr_);
 		std::cout << "After : ";
-		for (std::deque<std::pair<int, int> >::iterator it = d.arr_.begin();
-			 it != d.arr_.end(); ++it)
+		for (std::deque<std::pair<int, int> >::iterator it = d.arr_.begin(); it != d.arr_.end(); ++it)
 			std::cout << it->first << " ";
-		std::cout << std::endl << std::endl;
+		std::cout << std::endl
+				  << std::endl;
 		end = clock();
 		double time_taken = double(end - start) / double(CLOCKS_PER_SEC);
-		std::cout << "Time taken for a deque of size " << d.arr_.size()
-				  << " is : " << std::fixed << time_taken
-				  << std::setprecision(5);
+		std::cout << "Time taken for a deque of size " << d.arr_.size() << " is : " << std::fixed << time_taken << std::setprecision(5);
 		std::cout << " sec " << std::endl;
 	}
 	catch (std::exception &e)

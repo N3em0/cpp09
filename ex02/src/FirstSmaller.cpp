@@ -5,7 +5,10 @@ FirstSmaller::FirstSmaller() {}
 
 FirstSmaller::FirstSmaller(const FirstSmaller &) {}
 
-FirstSmaller &FirstSmaller::operator=(const FirstSmaller &) { return (*this); }
+FirstSmaller &FirstSmaller::operator=(const FirstSmaller &)
+{
+	return (*this);
+}
 
 FirstSmaller::~FirstSmaller() {}
 

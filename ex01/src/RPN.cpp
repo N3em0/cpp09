@@ -1,9 +1,11 @@
 #include "RPN.hpp"
 #include <cstdlib>
 
-Rpn::Rpn() : result_(0), values_() {}
+Rpn::Rpn()
+	: result_(0), values_() {}
 
-Rpn::Rpn(const Rpn &src) : result_(src.result_), values_(src.values_) {}
+Rpn::Rpn(const Rpn &src)
+	: result_(src.result_), values_(src.values_) {}
 
 Rpn &Rpn::operator=(const Rpn &rhs)
 {
@@ -15,9 +17,15 @@ Rpn &Rpn::operator=(const Rpn &rhs)
 	return (*this);
 }
 
-const std::stack<int> &Rpn::getValues() { return (this->values_); }
+const std::stack<int> &Rpn::getValues()
+{
+	return (this->values_);
+}
 
-const long &Rpn::getResult() { return (this->result_); }
+const long &Rpn::getResult()
+{
+	return (this->result_);
+}
 
 void Rpn::doOperation(const char &c)
 {
@@ -68,7 +76,6 @@ static bool isOperator(const char &c)
 
 void Rpn::processRpn(std::string str)
 {
-
 	for (size_t i = 0; i < str.size(); ++i)
 	{
 		if (std::isdigit(str[i]))
