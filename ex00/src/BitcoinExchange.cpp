@@ -59,7 +59,7 @@ static bool parseDate(std::string date)
     return false;
   std::stringstream ss(date);
 
-  if (!(ss >> year >> trait1 >> month >> trait2 >> day))
+  if (!(ss >> year >> trait1 >> month >> trait2 >> day) || !ss.eof())
     return false;
 
   std::tm tBtc;
@@ -122,9 +122,14 @@ void BitcoinExchange::processInData(char *file)
   {
     std::string date = str.substr(0, str.find('|') - 1);
     std::string valueStr = str.substr(str.find('|') + 1);
-    if (!parseDate(date) || !parseValue(valueStr))
+    if (!parseDate(date))
     {
-      std::cout << "Error: bad input => " << date << std::endl;
+      std::cout << "Error: bad input => [" << date << "]" << std::endl;
+      continue;
+    }
+    if (!parseValue(valueStr))
+    {
+      std::cout << "Error: bad input => [" << valueStr << "]" << std::endl;
       continue;
     }
     float value = std::atof(valueStr.c_str());
@@ -146,7 +151,10 @@ void BitcoinExchange::processInData(char *file)
       std::map<std::string, float>::iterator it;
       it = this->csvData_.find(date);
       if (it == this->csvData_.end())
+      {
         it = this->csvData_.lower_bound(date);
+        it--;
+      }
       float result = value * it->second;
       std::cout << date << " => " << value << " = " << result << std::endl;
     }
