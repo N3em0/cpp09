@@ -197,4 +197,14 @@ PmergeMe<T>::~PmergeMe()
 {
 }
 
+template <typename T>
+PmergeMe<T>::alreadySorted::alreadySorted()
+{
+}
+
+template <typename T>
+PmergeMe<T>::badInputException::badInputException()
+{
+}
+
 #endif
