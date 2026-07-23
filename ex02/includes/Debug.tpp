@@ -36,7 +36,8 @@ static void printArr(T &big, T &small, T &rest)
 		std::cout << std::endl;
 		std::cout << "rest id     : ";
 		for (typename T::iterator it = rest.begin(); it != rest.end(); ++it)
-			std::cout << "{" << std::right << std::setw(4) << it->second << "} ";
+			std::cout << "{" << std::right << std::setw(4) << it->second
+					  << "} ";
 		std::cout << std::endl;
 	}
 	std::cout << "------------" << std::endl;
@@ -47,8 +48,7 @@ static void printArr(T &big, T &small)
 	std::cout << "main value  : ";
 	for (typename T::iterator it = big.begin(); it != big.end(); ++it)
 		std::cout << "[" << std::right << std::setw(4) << it->first << "] ";
-	std::cout << std::endl
-			  << "main id     : ";
+	std::cout << std::endl << "main id     : ";
 	for (typename T::iterator it = big.begin(); it != big.end(); ++it)
 		std::cout << "[" << std::right << std::setw(4) << it->second << "] ";
 	std::cout << std::endl;
@@ -56,8 +56,7 @@ static void printArr(T &big, T &small)
 	std::cout << "small value : ";
 	for (typename T::iterator it = small.begin(); it != small.end(); ++it)
 		std::cout << "(" << std::right << std::setw(4) << it->first << ") ";
-	std::cout << std::endl
-			  << "small id    : ";
+	std::cout << std::endl << "small id    : ";
 	for (typename T::iterator it = small.begin(); it != small.end(); ++it)
 		std::cout << "(" << std::right << std::setw(4) << it->second << ") ";
 	std::cout << std::endl;

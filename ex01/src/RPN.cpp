@@ -1,11 +1,9 @@
 #include "RPN.hpp"
 #include <cstdlib>
 
-Rpn::Rpn()
-	: result_(0), values_() {}
+Rpn::Rpn() : result_(0), values_() {}
 
-Rpn::Rpn(const Rpn &src)
-	: result_(src.result_), values_(src.values_) {}
+Rpn::Rpn(const Rpn &src) : result_(src.result_), values_(src.values_) {}
 
 Rpn &Rpn::operator=(const Rpn &rhs)
 {
