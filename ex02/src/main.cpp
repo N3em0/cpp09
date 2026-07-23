@@ -10,6 +10,17 @@
 #include <vector>
 
 template <typename T>
+static bool isSorted(T arr)
+{
+  for (typename T::iterator it = arr.begin() + 1; it != arr.end(); ++it)
+  {
+    if (it->first < (it - 1)->first)
+      return (false);
+  }
+  return (true);
+}
+
+template <typename T>
 static bool hasDuplicates(T arr)
 {
   std::sort(arr.begin(), arr.end());
@@ -27,11 +38,11 @@ static void parseArgs(int argc, char **argv, T &arr)
     std::stringstream ss(argv[i]);
     ss >> val;
     if (ss.fail() || val < 0)
-      throw std::exception();
+      throw typename PmergeMe<T>::badInputException();
     arr.push_back(std::make_pair(val, 0));
   }
   if (hasDuplicates(arr) == false)
-    throw std::exception();
+    throw typename PmergeMe<T>::badInputException();
 }
 
 int main(int argc, char **argv)
@@ -47,7 +58,11 @@ int main(int argc, char **argv)
     start = clock();
     std::vector<std::pair<int, int> > arr;
     arr.reserve(argc - 1);
+
     parseArgs(argc, argv, arr);
+    if (isSorted(arr))
+      throw PmergeMe<std::vector<std::pair<int, int> > >::alreadySorted();
+
     PmergeMe<std::vector<std::pair<int, int> > > v(arr);
 
     std::cout << "Before : ";
@@ -71,7 +86,6 @@ int main(int argc, char **argv)
   catch (std::exception &e)
   {
     std::cout << e.what() << std::endl;
-    return (1);
   }
 
   /* std::deque */
@@ -81,8 +95,13 @@ int main(int argc, char **argv)
     clock_t start, end;
     start = clock();
     std::deque<std::pair<int, int> > arr;
+
     parseArgs(argc, argv, arr);
+    if (isSorted(arr))
+      throw PmergeMe<std::deque<std::pair<int, int> > >::alreadySorted();
+
     PmergeMe<std::deque<std::pair<int, int> > > d(arr);
+
     std::cout << "Before : ";
     for (std::deque<std::pair<int, int> >::iterator it = d.arr_.begin();
          it != d.arr_.end(); ++it)
@@ -103,6 +122,5 @@ int main(int argc, char **argv)
   catch (std::exception &e)
   {
     std::cout << e.what() << std::endl;
-    return (1);
   }
 }
