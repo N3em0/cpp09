@@ -1,12 +1,10 @@
 #include "SecondEqual.hpp"
 
-SecondEqual::SecondEqual(int target)
-	: target(target) {}
+SecondEqual::SecondEqual(int target) : target(target) {}
 
 SecondEqual::SecondEqual() {}
 
-SecondEqual::SecondEqual(const SecondEqual &src)
-	: target(src.target) {}
+SecondEqual::SecondEqual(const SecondEqual &src) : target(src.target) {}
 
 SecondEqual &SecondEqual::operator=(const SecondEqual &rhs)
 {
