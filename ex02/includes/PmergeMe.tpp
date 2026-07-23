@@ -67,9 +67,9 @@ void PmergeMe<T>::binarySearch(T &big, T &small, const std::vector<int> &jIndex)
        it++)
   {
     typename T::iterator fit;
-    SecondEqual id(small[(*it) - 1].second);
+    SecondEqual matchingId(small[(*it) - 1].second);
     typename T::iterator idIt;
-    idIt = std::find_if(big.begin(), big.end(), id);
+    idIt = std::find_if(big.begin(), big.end(), matchingId);
     if (idIt != big.end())
       fit = std::lower_bound(big.begin(), idIt, small[(*it) - 1].first,
                              FirstSmaller());
