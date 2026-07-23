@@ -22,6 +22,25 @@ public:
                          const std::vector<int> &jSuit);
   void binarySearch(T &big, T &small, const std::vector<int> &jIndex);
 
+  class alreadySorted : public std::exception
+  {
+  public:
+    alreadySorted();
+    virtual const char *what() const throw()
+    {
+      return ("Array is already sorted");
+    }
+  };
+
+  class badInputException : public std::exception
+  {
+  public:
+    badInputException();
+    virtual const char *what() const throw()
+    {
+      return ("Error: Wrong input. Positive integers only");
+    }
+  };
   ~PmergeMe();
 
   T arr_;
