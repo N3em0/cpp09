@@ -167,8 +167,6 @@ void PmergeMe<T>::upSort(T &big, T &small, T &rest)
 	binarySearch(big, small, jIndex);
 }
 
-// #include <iostream>
-
 template <typename T>
 void PmergeMe<T>::downSort(T &arr)
 {
@@ -187,7 +185,7 @@ void PmergeMe<T>::downSort(T &arr)
 		upSort(big, small, rest);
 		arr = big;
 	}
-	// std::cout << std::endl << "============" << std::endl;
+	D_SEP();
 	return;
 }
 
