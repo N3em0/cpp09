@@ -1,5 +1,7 @@
 #include "RPN.hpp"
+#include <climits>
 #include <cstdlib>
+#include <stdexcept>
 
 Rpn::Rpn() : result_(0), values_() {}
 
@@ -25,13 +27,15 @@ const long &Rpn::getResult()
 	return (this->result_);
 }
 
+#include <iostream>
+
 void Rpn::doOperation(const char &c)
 {
 	if (this->values_.size() < 2)
 		throw Rpn::tooManyOp();
-	int a = this->values_.top();
+	long a = this->values_.top();
 	this->values_.pop();
-	int b = this->values_.top();
+	long b = this->values_.top();
 	this->values_.pop();
 
 	switch (c)
@@ -46,9 +50,13 @@ void Rpn::doOperation(const char &c)
 		this->result_ = b * a;
 		break;
 	case ('/'):
+		if (a == 0)
+			throw std::runtime_error("Error: Cannot divide by zero\n");
 		this->result_ = b / a;
 		break;
 	}
+	if (this->result_ > INT_MAX || this->result_ < INT_MIN)
+		throw std::runtime_error("Error: Result is overflowing\n");
 	this->values_.push(static_cast<int>(this->result_));
 	return;
 }
