@@ -27,8 +27,6 @@ const long &Rpn::getResult()
 	return (this->result_);
 }
 
-#include <iostream>
-
 void Rpn::doOperation(const char &c)
 {
 	if (this->values_.size() < 2)
