@@ -1,7 +1,6 @@
 #include "RPN.hpp"
-#include <climits>
-#include <cstdlib>
-#include <stdexcept>
+#include <climits>	 //INT_MAX, INT_MIN
+#include <stdexcept> //runtime_error
 
 Rpn::Rpn() : result_(0), values_() {}
 
