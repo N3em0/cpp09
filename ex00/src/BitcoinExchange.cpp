@@ -142,7 +142,6 @@ void BitcoinExchange::processInData(char *file)
 			std::cout << "Error: not a positive number" << std::endl;
 			continue;
 		}
-
 		else if (value > 1000)
 		{
 			std::cout << "Error: too large number" << std::endl;
