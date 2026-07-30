@@ -2,13 +2,18 @@
 #define DEBUG_TPP
 
 /* DEBUG */
-#include "FirstEqual.hpp"
 #ifdef DEBUG_MODE
 
+#include "FirstEqual.hpp"
 #include <algorithm>
 #include <iomanip>
 #include <iostream>
 #include <vector>
+
+static void printSeparator(void)
+{
+	std::cout << std::endl << "============\n" << std::endl;
+}
 
 template <typename T>
 static void printArr(T &big, T &small, T &rest)
@@ -85,12 +90,14 @@ static void printJacob(std::vector<int> &arr, std::string str)
 #define D_ARR(big, small, rest) printArr(big, small, rest)
 #define D_BINARR(big, sPrint, value) printBinArr(big, sPrint, value)
 #define D_JACOB(arr, str) printJacob(arr, str)
+#define D_SEP() printSeparator();
 
 #else
 
 #define D_ARR(big, small, rest)
 #define D_BINARR(big, sPrint, value)
 #define D_JACOB(arr, str)
+#define D_SEP()
 
 #endif
 
