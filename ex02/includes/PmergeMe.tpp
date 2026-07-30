@@ -60,9 +60,9 @@ void PmergeMe<T>::sortPairs(T &unsorted, T &big, T &small, T &rest)
 template <typename T>
 void PmergeMe<T>::binarySearch(T &big, T &small, const std::vector<int> &jIndex)
 {
-	D_ARR2(big, small);
+	T sPrint = small;
 	big.insert(big.begin(), small[0]);
-	D_ARR2(big, small);
+	D_BINARR(big, sPrint, small[0].first);
 	for (std::vector<int>::const_iterator it = jIndex.begin();
 		 it != jIndex.end(); it++)
 	{
@@ -77,7 +77,7 @@ void PmergeMe<T>::binarySearch(T &big, T &small, const std::vector<int> &jIndex)
 			fit = std::lower_bound(big.begin(), big.end(),
 								   small[(*it) - 1].first, FirstSmaller());
 		big.insert(fit, small[(*it) - 1]);
-		D_ARR2(big, small);
+		D_BINARR(big, sPrint, small[(*it) - 1].first);
 	}
 }
 
@@ -185,7 +185,6 @@ void PmergeMe<T>::downSort(T &arr)
 		matchBigId(big, save);
 		D_ARR(big, small, rest);
 		upSort(big, small, rest);
-		D_ARR(big, small, rest);
 		arr = big;
 	}
 	// std::cout << std::endl << "============" << std::endl;

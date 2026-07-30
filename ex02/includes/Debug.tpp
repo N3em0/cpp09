@@ -2,11 +2,14 @@
 #define DEBUG_TPP
 
 /* DEBUG */
+#include "FirstEqual.hpp"
 #ifdef DEBUG_MODE
 
+#include <algorithm>
 #include <iomanip>
 #include <iostream>
 #include <vector>
+
 template <typename T>
 static void printArr(T &big, T &small, T &rest)
 {
@@ -43,7 +46,7 @@ static void printArr(T &big, T &small, T &rest)
 	std::cout << "------------" << std::endl;
 }
 template <typename T>
-static void printArr(T &big, T &small)
+static void printBinArr(T &big, T &sPrint, int value)
 {
 	std::cout << "main value  : ";
 	for (typename T::iterator it = big.begin(); it != big.end(); ++it)
@@ -53,11 +56,17 @@ static void printArr(T &big, T &small)
 		std::cout << "[" << std::right << std::setw(4) << it->second << "] ";
 	std::cout << std::endl;
 
+	FirstEqual val(value);
+	typename T::iterator sIt;
+	sIt = std::find_if(sPrint.begin(), sPrint.end(), val);
+	if (sIt != sPrint.end())
+		sPrint.erase(sIt);
+
 	std::cout << "small value : ";
-	for (typename T::iterator it = small.begin(); it != small.end(); ++it)
+	for (typename T::iterator it = sPrint.begin(); it != sPrint.end(); ++it)
 		std::cout << "(" << std::right << std::setw(4) << it->first << ") ";
 	std::cout << std::endl << "small id    : ";
-	for (typename T::iterator it = small.begin(); it != small.end(); ++it)
+	for (typename T::iterator it = sPrint.begin(); it != sPrint.end(); ++it)
 		std::cout << "(" << std::right << std::setw(4) << it->second << ") ";
 	std::cout << std::endl;
 	std::cout << "------------" << std::endl;
@@ -74,13 +83,13 @@ static void printJacob(std::vector<int> &arr, std::string str)
 }
 
 #define D_ARR(big, small, rest) printArr(big, small, rest)
-#define D_ARR2(big, small) printArr(big, small)
+#define D_BINARR(big, sPrint, value) printBinArr(big, sPrint, value)
 #define D_JACOB(arr, str) printJacob(arr, str)
 
 #else
 
 #define D_ARR(big, small, rest)
-#define D_ARR2(big, small)
+#define D_BINARR(big, sPrint, value)
 #define D_JACOB(arr, str)
 
 #endif
