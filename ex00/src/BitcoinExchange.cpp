@@ -1,8 +1,7 @@
 #include "BitcoinExchange.hpp"
-#include <cctype>
-#include <climits>
-#include <cstdlib>
-#include <cstring>
+#include <cctype>  //std::isdigit
+#include <cstdlib> //std::atof
+#include <cstring> //std::memset
 #include <ctime>
 #include <fstream>
 #include <iostream>
