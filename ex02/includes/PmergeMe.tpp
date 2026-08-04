@@ -66,17 +66,13 @@ void PmergeMe<T>::binarySearch(T &big, T &small, const std::vector<int> &jIndex)
 	for (std::vector<int>::const_iterator it = jIndex.begin();
 		 it != jIndex.end(); it++)
 	{
-		typename T::iterator fit;
+		typename T::iterator fIt;
 		SecondEqual matchingId(small[(*it) - 1].second);
 		typename T::iterator idIt;
 		idIt = std::find_if(big.begin(), big.end(), matchingId);
-		if (idIt != big.end())
-			fit = std::lower_bound(big.begin(), idIt, small[(*it) - 1].first,
-								   FirstSmaller());
-		else
-			fit = std::lower_bound(big.begin(), big.end(),
-								   small[(*it) - 1].first, FirstSmaller());
-		big.insert(fit, small[(*it) - 1]);
+		fIt = std::lower_bound(big.begin(), idIt, small[(*it) - 1].first,
+							   FirstSmaller());
+		big.insert(fIt, small[(*it) - 1]);
 		D_BINARR(big, sPrint, small[(*it) - 1].first);
 	}
 }
@@ -126,9 +122,9 @@ void PmergeMe<T>::matchBigId(T &big, T &save)
 	for (typename T::iterator it = big.begin(); it != big.end(); ++it)
 	{
 		FirstEqual index(it->first);
-		typename T::iterator fit;
-		fit = std::find_if(save.begin(), save.end(), index);
-		it->second = fit->second;
+		typename T::iterator fIt;
+		fIt = std::find_if(save.begin(), save.end(), index);
+		it->second = fIt->second;
 	}
 	return;
 }
@@ -140,9 +136,9 @@ T PmergeMe<T>::matchBigSmall(T &big, T &small)
 	for (typename T::iterator it = big.begin(); it != big.end(); ++it)
 	{
 		SecondEqual index(it->second);
-		typename T::iterator fit;
-		fit = std::find_if(small.begin(), small.end(), index);
-		smallS.push_back(*(fit));
+		typename T::iterator fIt;
+		fIt = std::find_if(small.begin(), small.end(), index);
+		smallS.push_back(*(fIt));
 	}
 	return (smallS);
 }
