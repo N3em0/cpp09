@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 		Rpn a;
 
 		a.processRpn(argv[1]);
-		std::cout << a.getResult() << std::endl;
+		std::cout << a.getValues().top() << std::endl;
 		return (0);
 	}
 	catch (std::exception &e)
