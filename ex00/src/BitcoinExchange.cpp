@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
 
 BitcoinExchange::BitcoinExchange() : csvData_() {}
 
@@ -26,23 +27,6 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &rhs)
 const std::map<std::string, float> &BitcoinExchange::getCsvData()
 {
 	return (this->csvData_);
-}
-
-void BitcoinExchange::processCsvData()
-{
-	std::ifstream inFile("data.csv");
-	std::string str;
-	if (!inFile.is_open())
-	{
-		throw std::invalid_argument("Wrong file");
-		return;
-	}
-	std::getline(inFile, str);
-	while (std::getline(inFile, str))
-	{
-		this->csvData_[str.substr(0, str.find(','))] =
-			std::atof((str.substr(str.find(',') + 1)).c_str());
-	}
 }
 
 #include <iostream>
@@ -107,13 +91,45 @@ static bool parseValue(std::string valueStr)
 	return (false);
 }
 
+void BitcoinExchange::processCsvData()
+{
+	std::ifstream inFile("data.csv");
+	std::string str;
+	if (!inFile.is_open())
+	{
+		throw std::invalid_argument("Error: Wrong file or file doesn't exist");
+		return;
+	}
+	std::getline(inFile, str);
+	if (std::strcmp(str.c_str(), "date,exchange_rate") != 0)
+		throw std::runtime_error("Error: Wrong csv header");
+	while (std::getline(inFile, str))
+	{
+		std::string date = str.substr(0, str.find(','));
+		std::string valueStr(str.substr(str.find(',') + 1));
+		std::stringstream valueSs(valueStr);
+		float value;
+		if (!parseDate(date))
+		{
+			throw std::runtime_error("Error: bad csv date => [" + date + "]");
+		}
+		if (!(valueSs >> value) || !valueSs.eof() || value < 0)
+		{
+			throw std::runtime_error("Error: bad csv value => [" + valueStr +
+									 "]");
+		}
+		this->csvData_[date] = std::atof(valueStr.c_str());
+	}
+}
+
 void BitcoinExchange::processInData(char *file)
 {
 	std::ifstream inFile(file);
 	std::string str;
 	if (!inFile.is_open())
 	{
-		std::cout << "Error: could not open file." << std::endl;
+		std::cout << "Error: could not open file or file doesn't exist."
+				  << std::endl;
 		return;
 	}
 	std::getline(inFile, str);
