@@ -32,7 +32,7 @@ class Rpn
 		tooManyOp();
 		virtual const char *what() const throw()
 		{
-			return ("Error: Too many operators\nValid operator count = "
+			return ("Error: Wrong operator count.\nValid operator count = "
 					"digitCount - 1");
 		}
 	};
@@ -43,7 +43,7 @@ class Rpn
 		tooManyDigits();
 		virtual const char *what() const throw()
 		{
-			return ("Error: Too many digits\nValid digits count = "
+			return ("Error: Wrong digit count.\nValid digits count = "
 					"operatorCount + 1");
 		}
 	};
