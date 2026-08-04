@@ -70,8 +70,6 @@ static bool parseDate(std::string date)
 	tBtc.tm_mday = 2;
 	btcCreation = std::mktime(&tBtc);
 
-	time_t today = std::time(0);
-
 	std::tm tDate;
 	std::memset(&tDate, 0, sizeof(std::tm));
 	time_t result;
@@ -85,7 +83,7 @@ static bool parseDate(std::string date)
 	if ((year - 1900) != tDate.tm_year || (month - 1) != tDate.tm_mon ||
 		day != tDate.tm_mday)
 		return false;
-	if (result < btcCreation || result > today)
+	if (result < btcCreation)
 		return (false);
 	return (true);
 }
@@ -93,6 +91,8 @@ static bool parseDate(std::string date)
 static bool parseValue(std::string valueStr)
 {
 	if (valueStr.size() <= 1)
+		return (false);
+	if (valueStr[0] != ' ')
 		return (false);
 	if (!std::isdigit(valueStr[1]) && valueStr[1] != '-')
 		return (false);
