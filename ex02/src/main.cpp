@@ -48,7 +48,10 @@ static void parseArgs(int argc, char **argv, T &arr)
 int main(int argc, char **argv)
 {
 	if (argc < 3)
+	{
+		std::cerr << "Error: Wrong argument count" << std::endl;
 		return (1);
+	}
 
 	/* std::vector */
 	std::cout << "\n++++++++++ STD::VECTOR ++++++++++\n" << std::endl;
@@ -86,7 +89,7 @@ int main(int argc, char **argv)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << e.what() << std::endl;
+		std::cerr << e.what() << std::endl;
 	}
 
 	/* std::deque */
@@ -123,6 +126,6 @@ int main(int argc, char **argv)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << e.what() << std::endl;
+		std::cerr << e.what() << std::endl;
 	}
 }
