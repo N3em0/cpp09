@@ -24,7 +24,7 @@ class BitcoinExchange
 		badInputHeader();
 		virtual const char *what() const throw()
 		{
-			return ("Error: bad input.txt header");
+			return ("Error: bad input file header format");
 		}
 	};
 
