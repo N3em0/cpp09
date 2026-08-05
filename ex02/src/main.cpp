@@ -86,6 +86,8 @@ int main(int argc, char **argv)
 				  << " is : " << std::fixed << time_taken
 				  << std::setprecision(5);
 		std::cout << " sec " << std::endl;
+		if (isSorted(v.arr_))
+			std::cout << "Vector array is sorted" << std::endl;
 	}
 	catch (std::exception &e)
 	{
@@ -106,23 +108,15 @@ int main(int argc, char **argv)
 
 		PmergeMe<std::deque<std::pair<int, int> > > d(arr);
 
-		std::cout << "Before : ";
-		for (std::deque<std::pair<int, int> >::iterator it = d.arr_.begin();
-			 it != d.arr_.end(); ++it)
-			std::cout << it->first << " ";
-		std::cout << std::endl << std::endl;
 		d.downSort(d.arr_);
-		std::cout << "After : ";
-		for (std::deque<std::pair<int, int> >::iterator it = d.arr_.begin();
-			 it != d.arr_.end(); ++it)
-			std::cout << it->first << " ";
-		std::cout << std::endl << std::endl;
 		end = clock();
 		double time_taken = double(end - start) / double(CLOCKS_PER_SEC);
 		std::cout << "Time taken for a deque of size " << d.arr_.size()
 				  << " is : " << std::fixed << time_taken
 				  << std::setprecision(5);
 		std::cout << " sec " << std::endl;
+		if (isSorted(d.arr_))
+			std::cout << "Deque array is sorted" << std::endl;
 	}
 	catch (std::exception &e)
 	{
