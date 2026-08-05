@@ -78,21 +78,21 @@ void PmergeMe<T>::binarySearch(T &big, T &small, const std::vector<int> &jIndex)
 }
 
 template <typename T>
-void PmergeMe<T>::computeJacobSuit(T &small, std::vector<int> &jSuit)
+void PmergeMe<T>::computeJacobSuit(size_t size, std::vector<int> &jSuit)
 {
 	int nMinus1 = 1;
 	int nMinus2 = 1;
 	size_t val = 1;
-	while (val < small.size())
+	while (val < size)
 	{
 		val = nMinus1 + (2 * nMinus2);
 		nMinus2 = nMinus1;
 		nMinus1 = val;
-		if (val < small.size())
+		if (val < size)
 			jSuit.push_back(val);
 		else
 		{
-			jSuit.push_back(small.size());
+			jSuit.push_back(size);
 			break;
 		}
 	}
@@ -156,7 +156,7 @@ void PmergeMe<T>::upSort(T &big, T &small, T &rest)
 		small.push_back(rest[0]);
 		rest.clear();
 	}
-	computeJacobSuit(small, jSuit);
+	computeJacobSuit(small.size(), jSuit);
 	computeJacobIndex(jIndex, jSuit);
 	D_JACOB(jSuit, "jSuit");
 	D_JACOB(jIndex, "jIndex");
