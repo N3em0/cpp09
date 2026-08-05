@@ -26,7 +26,7 @@ const long &Rpn::getResult()
 	return (this->result_);
 }
 
-void Rpn::doOperation(const char &c)
+void Rpn::doOperation(const char c)
 {
 	if (this->values_.size() < 2)
 		throw Rpn::tooManyOp();
@@ -58,7 +58,7 @@ void Rpn::doOperation(const char &c)
 	return;
 }
 
-static bool isOperator(const char &c)
+static bool isOperator(const char c)
 {
 	switch (c)
 	{

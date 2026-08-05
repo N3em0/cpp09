@@ -13,7 +13,7 @@ class Rpn
 
 	const std::stack<int> &getValues();
 	const long &getResult();
-	void doOperation(const char &c);
+	void doOperation(const char c);
 	void processRpn(std::string str);
 
 	class badCharException : public std::exception
